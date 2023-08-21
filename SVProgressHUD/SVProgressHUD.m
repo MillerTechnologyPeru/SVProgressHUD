@@ -417,12 +417,18 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
         
         NSBundle *bundle = [NSBundle bundleForClass:[SVProgressHUD class]];
         NSURL *url = [bundle URLForResource:@"SVProgressHUD" withExtension:@"bundle"];
-        NSBundle *imageBundle = [NSBundle bundleWithURL:url];
+        NSBundle *imageBundle;
+        if (url == nil) {
+            imageBundle = [NSBundle mainBundle];
+        } else {
+            imageBundle = [NSBundle bundleWithURL:url];
+        }
         
         _infoImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"info" ofType:@"png"]];
         _successImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"success" ofType:@"png"]];
         _errorImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"error" ofType:@"png"]];
-
+        NSAssert(_infoImage != nil, @"Could not load image");
+        
         _ringThickness = 2.0f;
         _ringRadius = 18.0f;
         _ringNoTextRadius = 24.0f;
