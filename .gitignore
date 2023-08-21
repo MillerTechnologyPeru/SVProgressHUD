@@ -12,6 +12,8 @@
 project.xcworkspace/
 xcuserdata/
 DerivedData/
+.build
+.swiftpm
 
 # Generated files
 build/
